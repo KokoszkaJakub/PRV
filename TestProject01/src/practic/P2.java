@@ -4,41 +4,36 @@ import javax.swing.JOptionPane;
 
 public class P2 {
 	static String dayName(int nr) {
-		String day;
 		switch (nr) {
 		case 1:
-			day = "poniedziałek";
-			break;
+			return "poniedziałek";
 		case 2:
-			day = "wtorek";
-			break;
+			return "wtorek";
 		case 3:
-			day = "środa";
-			break;
+			return "środa";
 		case 4:
-			day = "czwartek";
-			break;
+			return "czwartek";
 		case 5:
-			day = "piątek";
-			break;
+			return "piątek";
 		case 6:
-			day = "sobota";
-			break;
+			return "sobota";
 		case 7:
-			day = "niedziela";
-			break;
+			return "niedziela";
 		default:
-			day = "Błędny nr dnia!";
+			throw new IllegalArgumentException();
 		}
-		return day;
 	}
 
 	public static void main(String[] args) {
-
-		String nrTxt = JOptionPane.showInputDialog("Podaj numer dnia tygodnia (od 1 do 7):");
-		int nr = Integer.parseInt(nrTxt);
-		String day = dayName(nr);
-		JOptionPane.showMessageDialog(null, day);
+		try {
+			String nrTxt = JOptionPane.showInputDialog("Podaj numer dnia tygodnia (od 1 do 7):");
+			int nr = Integer.parseInt(nrTxt);
+			String day = dayName(nr);
+			JOptionPane.showMessageDialog(null, day);
+		} catch (IllegalArgumentException e) {
+			JOptionPane.showMessageDialog(null, "Podałeś błędny numer dnia!!", "Błąd",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 }
