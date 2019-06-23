@@ -48,9 +48,15 @@ public class Calc {
 		panel.add(guzikMinus);
 
 		JButton guzikRazy = new JButton("*");
-		guzikMinus.setFont(czcionka);
-		guzikMinus.setPreferredSize(rozmiarGuzika);
+		guzikRazy.setFont(czcionka);
+		guzikRazy.setPreferredSize(rozmiarGuzika);
 		panel.add(guzikRazy);
+		
+		JButton guzikDziel = new JButton("/");
+		guzikDziel.setFont(czcionka);
+		guzikDziel.setPreferredSize(rozmiarGuzika);
+		panel.add(guzikDziel);
+		
 		
 		JLabel etykieta = new JLabel("Wynik");
 		etykieta.setFont(czcionka);
@@ -81,6 +87,16 @@ public class Calc {
 				etykieta.setText(String.valueOf(a * b));
 			}
 		});
+		
+		guzikDziel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int a = Integer.parseInt(pole1.getText());
+				int b = Integer.parseInt(pole2.getText());
+				etykieta.setText(String.valueOf(a / b));
+			}
+		});
+		
 		LayoutManager layout = new FlowLayout(FlowLayout.LEFT, 20, 40);
 		panel.setLayout(layout);
 		okno.setContentPane(panel);
