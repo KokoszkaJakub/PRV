@@ -1,53 +1,36 @@
 package practic;
 
 public class Zbiornik {
-	private double pojemnosc;
-	private double ileLitrow;
-	final private double minPojemnosc = 0;
+	double pojemnosc;
+	double ileLitrow;
+	final double minPojemnosc = 0;
 	int id;
 
 	static int nastepneId = 0;
 
-	/**
-	 * @return the pojemnosc
-	 */
-	public double getPojemnosc() {
-		return pojemnosc;
-	}
-
-	/**
-	 * @param pojemnosc the pojemnosc to set
-	 */
-	public void setPojemnosc(double pojemnosc) {
-		this.pojemnosc = pojemnosc;
-	}
-
-	/**
-	 * @return the ileLitrow
-	 */
-	public double getIleLitrow() {
-		return ileLitrow;
-	}
-
-	/**
-	 * @param ileLitrow the ileLitrow to set
-	 */
-	public void setIleLitrow(double ileLitrow) {
-		this.ileLitrow = ileLitrow;
-	}
-
-	/**
-	 * @return the minPojemnosc
-	 */
-	public double getMinPojemnosc() {
-		return minPojemnosc;
-	}
-
 	void wylej(double ilosc) {
-		this.ileLitrow -= ilosc;
+		if ((this.ileLitrow - ilosc) >= minPojemnosc) {
+			this.ileLitrow = this.ileLitrow - ilosc;
+		} else {
+			System.out.println("brak wystarczającej iloci płynu w zbiotniku nr: " + id + " wewnątrz znajduję się "
+					+ ileLitrow + " zadana ilość: " + ilosc);
+			System.out.println("operacja nie została wykonana");
+
+		}
+
 	}
+
 	void wlej(double ilosc) {
-		this.ileLitrow += ilosc;
+		if ((this.ileLitrow + ilosc) <= pojemnosc) {
+			this.ileLitrow = this.ileLitrow + ilosc;
+		} else {
+			System.out.println("brak wystarczającej iloci miejsca w zbiotniku nr: " + id + " maksymalna pojemność"
+					+ " zbiornika to: " + pojemnosc + " zadana ilosc to: " + (this.ileLitrow + ilosc));
+			System.out.println("operacja nie została wykonana");
+		}
+	}
+	void przelej() {
+		
 	}
 
 	Zbiornik(double ileLitrow, double pojemnosc) {
@@ -59,21 +42,17 @@ public class Zbiornik {
 	}
 
 	void podajDane() {
-		System.out.println("Zbiornik nr " + id + " pojemnosc: " + getPojemnosc() + " obecnie znajduję się w nim: "
-				+ getIleLitrow());
+		System.out.println(
+				"Zbiornik nr " + id + " pojemnosc: " + pojemnosc + " obecnie znajduję się w nim: " + ileLitrow);
 	}
 
 	public static void main(String[] args) {
 		Zbiornik jedenZ = new Zbiornik(5, 10);
-		Zbiornik dwaZ = new Zbiornik(5, 10);
+		Zbiornik dwaZ = new Zbiornik(7, 10);
 		Zbiornik trzyZ = new Zbiornik(5, 10);
 		Zbiornik czteryZ = new Zbiornik(5, 10);
 
-		jedenZ.wylej(0);
-		jedenZ.wlej(0);
-		jedenZ.podajDane();
-		dwaZ.podajDane();
-		trzyZ.podajDane();
-		czteryZ.podajDane();
+		dwaZ.wlej(6);
+
 	}
 }
