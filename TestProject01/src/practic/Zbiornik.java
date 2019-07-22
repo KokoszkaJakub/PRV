@@ -1,12 +1,15 @@
 package practic;
 
+import java.util.Random;
+
 public class Zbiornik {
-	double pojemnosc;
-	double ileLitrow;
-	final double minPojemnosc = 0;
-	int id;
+	private double pojemnosc;
+	private double ileLitrow;
+	final private double minPojemnosc = 0;
+	private int id;
 
 	static int nastepneId = 0;
+	static Random gen = new Random();
 
 	void wylej(double ilosc) {
 		if ((this.ileLitrow - ilosc) >= minPojemnosc) {
@@ -29,8 +32,11 @@ public class Zbiornik {
 			System.out.println("operacja nie została wykonana");
 		}
 	}
-	void przelej() {
-		
+
+	void przelej(double ile, Zbiornik gdziePrzelac) {
+		wylej(ile);
+		gdziePrzelac.wlej(ile);
+
 	}
 
 	Zbiornik(double ileLitrow, double pojemnosc) {
@@ -42,17 +48,26 @@ public class Zbiornik {
 	}
 
 	void podajDane() {
-		System.out.println(
-				"Zbiornik nr " + id + " pojemnosc: " + pojemnosc + " obecnie znajduję się w nim: " + ileLitrow);
+		
+		System.out.println("Zbiornik nr " + id + " pojemnosc: " + pojemnosc + "L" + " obecnie znajduję się w nim: "
+				+ ileLitrow + "L" );
+	}
+
+	void ileDoPelna() {
+		double idp = pojemnosc - ileLitrow;
+		System.out.println(idp);
 	}
 
 	public static void main(String[] args) {
-		Zbiornik jedenZ = new Zbiornik(5, 10);
-		Zbiornik dwaZ = new Zbiornik(7, 10);
-		Zbiornik trzyZ = new Zbiornik(5, 10);
-		Zbiornik czteryZ = new Zbiornik(5, 10);
 
-		dwaZ.wlej(6);
+		Zbiornik[] zbiorniki = new Zbiornik[50];
+		for (int a = 0; a < zbiorniki.length; a++) {
+			zbiorniki[a] = new Zbiornik(gen.nextInt(10), gen.nextInt(10));
+		}
+		zbiorniki[0].ileDoPelna();
+		zbiorniki[0].podajDane();
+		zbiorniki[7].podajDane();
+		zbiorniki[10].podajDane();
 
 	}
 }
